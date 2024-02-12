@@ -1,3 +1,9 @@
+# Bug fixes 
+- remove nodemon to launch api cause it's outdated and giving us errors when connecting to mongo
+- user/view.js -> Change onChange to onClick to submit information
+- project/view.js -> Change link to a useCallback function + looping to projects cause api is giving us an array
+- project/edit.js -> Adapt onSubmit function to an project variable array
+
 # Technical test
 
 ## Introduction

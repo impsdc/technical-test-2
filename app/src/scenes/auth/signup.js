@@ -9,7 +9,6 @@ import { setUser } from "../../redux/auth/actions";
 
 import LoadingButton from "../../components/loadingButton";
 import api from "../../services/api";
-
 export default () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Auth.user);
@@ -92,6 +91,8 @@ export default () => {
               </div>
               {/* SignIn Button */}
               <LoadingButton
+// @ts-ignore
+              LoadingButton
                 className="font-[Helvetica] w-[220px] bg-[#007bff] hover:bg-[#0069d9] text-[#fff] rounded-[30px] m-auto block text-[16px] p-[8px] min-h-[42px] "
                 loading={isSubmitting}
                 type="submit"

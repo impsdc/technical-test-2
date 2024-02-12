@@ -1,5 +1,5 @@
 import { Chart as ChartJS, registerables } from "chart.js";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { IoIosAt, IoIosLink, IoIosStats, IoLogoGithub } from "react-icons/io";
 import { RiRoadMapLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
@@ -34,11 +34,17 @@ export default function ProjectView() {
     }
   }, [copied]);
 
-  if (!project) return <Loader />;
+  const handleLink = useCallback((id) => {
+    history.push(`/project/edit/${id}`);
+  }, [])
 
+
+  if (!project) return <Loader />;
   return (
     <React.Fragment>
-      <div className="pl-20 pt-24 pb-4 w-[98%]">
+    {project.map((item) => {
+      return (
+        <div className="pl-20 pt-24 pb-4 w-[98%]">
         <div className="bg-[#FFFFFF] border border-[#E5EAEF] py-3 rounded-[16px]">
           <div className="flex justify-between px-3 pb-2  border-b border-[#E5EAEF]">
             <div>
@@ -46,21 +52,22 @@ export default function ProjectView() {
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => history.push(`/project/edit/${project?._id}`)}
+                onClick={() => handleLink(item._id)}
                 className="border !border-[#0560FD] text-[#0560FD] py-[7px] px-[20px] bg-[#FFFFFF] rounded-[16px]">
                 Edit
               </button>
             </div>
           </div>
-          <ProjectDetails project={project} />
+          <ProjectDetails project={item} />
         </div>
       </div>
+      )
+    })}
     </React.Fragment>
   );
 }
 
 const ProjectDetails = ({ project }) => {
-  console.log(project);
   return (
     <div>
       <div className="flex flex-wrap p-3">
@@ -70,7 +77,7 @@ const ProjectDetails = ({ project }) => {
               <div className="flex justify-between gap-2">
                 <div className="flex gap-20">
                   <span className="w-fit text-[20px] text-[#0C1024] font-bold">Nom du projet : </span>
-                  <span className="w-fit text-[20px] text-[#0C1024] font-bold">{project.name.toString()}</span>
+                  <span className="w-fit text-[20px] text-[#0C1024] font-bold">{project.name}</span>
                 </div>
                 <div className="flex flex-1 flex-column items-end gap-3">
                   <Links project={project} />

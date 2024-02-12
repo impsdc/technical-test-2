@@ -12,6 +12,7 @@ const app = express();
 
 const origin = [APP_URL, "https://join.le-stud.com"];
 
+console.log(origin);
 app.use(cors({ credentials: true, origin }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
